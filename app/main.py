@@ -32,24 +32,6 @@ app.add_middleware(
 )
 
 
-# connect to database (localhost for now)
-while  True:
-    try:
-        conn = psycopg2.connect(host='localhost',
-                                database='fastapi',
-                                user='postgres',
-                                password='chancho1986',
-                                cursor_factory=RealDictCursor)
-        cursor = conn.cursor()
-        print('Database connection bas successful')
-        break
-
-    except Exception as error:
-        print('Connection to Database failed ')
-        print('Error: ', error)
-        time.sleep(2)
-
-
 
 #Routers
 app.include_router(posts.router)
