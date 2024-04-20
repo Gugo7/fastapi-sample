@@ -1,7 +1,7 @@
 from fastapi import Depends, status, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
-from datetime import datetime, timedelta, UTC
+from datetime import datetime, timedelta, timezone
 from . import schemas, database, models
 from .config import settings as st
 from sqlalchemy.orm import Session
@@ -22,8 +22,10 @@ ACCESS_TOKEN_EXPIRE_MINUTES = st.access_token_expire_minutes
 def create_access_token(data: dict):
     to_encode = data.copy()
 
-    expire = datetime.now(UTC) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({'exp': expire})
+
+    print(datetime.now(timezone.utc))
 
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
