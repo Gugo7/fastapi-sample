@@ -85,4 +85,4 @@ jobs:
         with:
           service-id: ${{secrets.RENDER_SERVICE_ID}} # part of Deploy Hook
           api-key: ${{secrets.RENDER_API_KEY}} #create an API KEY in account settings
-          wait-for-success: true
+          # wait-for-success: true
