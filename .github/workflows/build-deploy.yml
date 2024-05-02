@@ -11,19 +11,19 @@ on: [push, pull_request]
 
 #global env:
 # env:
-#   DATABASE_HOSTNAME: localhost
+#   DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}}
 
 jobs:
   job1:
     env: #specific for this job
-      DATABASE_HOSTNAME: localhost
-      DATABASE_PORT: 5432
-      DATABASE_PASSWORD: chancho1986
-      DATABASE_NAME: fastapi
-      DATABASE_USERNAME: postgres
-      SECRET_KEY: 4b98c8d0d8bc9ef73f9588342bed806d96f8233ff0313e5ee27b8139bc32d5a5
-      ALGORITHM: HS256
-      ACCESS_TOKEN_EXPIRE_MINUTES: 60
+      DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}}
+      DATABASE_PORT: ${{secrest.DATABASE_PORT}}
+      DATABASE_PASSWORD: ${{secrest.DATABASE_PASSWORD}}
+      DATABASE_NAME: ${{secrest.DATABASE_NAME}}
+      DATABASE_USERNAME: ${{secrest.DATABASE_USERNAME}}
+      SECRET_KEY: ${{secrest.SECRET_KEY}}
+      ALGORITHM: ${{secrest.ALGORITHM}}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrest.ACCESS_TOKEN_EXPIRE_MINUTES}}
     runs-on: ubuntu-latest
     steps:
       - name: pulling git repo
