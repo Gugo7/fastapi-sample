@@ -4,4 +4,3 @@ venv/
 extras/
 api.service
 nginx
-test/
