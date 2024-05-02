@@ -9,9 +9,21 @@ on: [push, pull_request]
       # - 'anotherbranch'
       # - 'test_branch'
 
+#global env:
+# env:
+#   DATABASE_HOSTNAME: localhost
 
 jobs:
   job1:
+    env: #specific for this job
+      DATABASE_HOSTNAME: localhost
+      DATABASE_PORT: 5432
+      DATABASE_PASSWORD: chancho1986
+      DATABASE_NAME: fastapi
+      DATABASE_USERNAME: postgres
+      SECRET_KEY: 4b98c8d0d8bc9ef73f9588342bed806d96f8233ff0313e5ee27b8139bc32d5a5
+      ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 60
     runs-on: ubuntu-latest
     steps:
       - name: pulling git repo
