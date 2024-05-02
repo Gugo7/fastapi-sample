@@ -16,7 +16,7 @@ services:
       - DATABASE_HOSTNAME=postgres
       - DATABASE_PORT=5432
       - DATABASE_PASSWORD=chancho1986
-      - DATABASE_NAME=fastapi
+      - DATABASE_NAME=fastapi_test
       - DATABASE_USERNAME=postgres
       - SECRET_KEY=4b98c8d0d8bc9ef73f9588342bed806d96f8233ff0313e5ee27b8139bc32d5a5
       - ALGORITHM=HS256
