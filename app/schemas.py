@@ -58,7 +58,6 @@ class CreatePost(PostBase):
     
 class Post(PostBase):
     id: int
-    author: str
     created_at: datetime = datetime.now()
     owner_id: int
     owner: User

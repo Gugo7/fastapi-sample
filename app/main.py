@@ -5,10 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from .config import settings
 from .routers import auth, posts, users, votes
 from .database import engine
-import psycopg2
-from psycopg2.extras import RealDictCursor
-import time
-from . import models
+
+
 
 #load API to local server:
 #uvicorn main:app --reload
@@ -45,4 +43,3 @@ app.include_router(votes.router)
 @app.get("/")                                   # @<decorator>.METHOD(path)
 async def root():                               #function
     return {'message':'This is the root'}
-

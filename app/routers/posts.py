@@ -62,7 +62,7 @@ async def test_create_post(post:schemas.CreatePost,
                            db:Session = Depends(get_db),
                            current_user: int = Depends(oauth2.get_current_user)):
     
-    new_post = models.Post(author=current_user.username, owner_id=current_user.id, **post.model_dump())
+    new_post = models.Post(owner_id=current_user.id, **post.model_dump())
     db.add(new_post)
     db.commit()
     db.refresh(new_post)
@@ -105,24 +105,24 @@ async def test_edit_post(id: int, post:schemas.UpdatedPost,
                          db: Session = Depends(get_db),
                          current_user: int = Depends(oauth2.get_current_user)):
     
-    post = db.query(models.Post).filter(models.Post.id == id)
+    post_query = db.query(models.Post).filter(models.Post.id == id)
 
-    post_query = post.first()
+    post_update = post_query.first()
 
-    if not post_query:
+    if not post_update:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail='Post not found'
         )
     
-    if post_query.owner_id != current_user.id:
+    if post_update.owner_id != current_user.id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail='Not authorized to perform requested action'
         )
     
-    post.update(post.model_dump(),
-                    synchronize_session=False)
+    post_query.update(post.model_dump(), synchronize_session=False)
+    
     db.commit()
 
-    return post.first()
+    return post_query.first()
